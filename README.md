@@ -6,6 +6,8 @@ Aplicação que conecta pessoas que possuem animais para doação com interessad
 
 Desenvolvida uma aplicação completa para adoção de animais.
 
+## Comandos
+
 ### virtualenv (windows)
 ```
 python -m venv env
@@ -16,6 +18,7 @@ env\Scripts\deactivate.bat
 ### Instalar bibliotecas, gravar/instalar requerimentos
 ```
 (env) pip install Django
+(env) pip install Pillow
 
 (env) pip freeze > requirements.txt
 (env) pip install -r requirements.txt
