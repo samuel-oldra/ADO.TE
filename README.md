@@ -6,6 +6,12 @@ Aplicação que conecta pessoas que possuem animais para doação com interessad
 
 Desenvolvida uma aplicação completa para adoção de animais.
 
+## Tecnologias e práticas utilizadas
+- Python
+- Django 4.1
+- SQLite
+- Arquitetura MVT
+
 ## Comandos
 
 ### virtualenv (windows)
@@ -22,4 +28,9 @@ env\Scripts\deactivate.bat
 
 (env) pip freeze > requirements.txt
 (env) pip install -r requirements.txt
+```
+
+### Criar projeto
+```
+(env) django-admin startproject adote .
 ```
