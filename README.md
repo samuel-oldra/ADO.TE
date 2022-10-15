@@ -34,3 +34,7 @@ env\Scripts\deactivate.bat
 ```
 (env) django-admin startproject adote .
 ```
+### Criar apps
+```
+(env) python manage.py startapp usuarios
+```
