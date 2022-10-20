@@ -12,6 +12,10 @@ Desenvolvida uma aplicação completa para adoção de animais.
 - SQLite
 - Arquitetura MVT
 
+###
+
+![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/cadastre-se.png)
+
 ## Comandos
 
 ### virtualenv (windows)
