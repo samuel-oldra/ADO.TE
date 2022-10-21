@@ -12,6 +12,9 @@ Desenvolvida uma aplicação completa para adoção de animais.
 - SQLite
 - Arquitetura MVT
 
+## Funcionalidades
+- Cadastro de Usuários
+
 ###
 
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/cadastre-se.png)
@@ -42,6 +45,12 @@ env\Scripts\deactivate.bat
 ### Criar apps
 ```
 (env) python manage.py startapp usuarios
+```
+
+### Migrations
+```
+(env) python manage.py makemigrations
+(env) python manage.py migrate
 ```
 
 ### Executar projeto
