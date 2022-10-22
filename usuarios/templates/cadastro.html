@@ -20,7 +20,8 @@
                 <h2>Cadastre-se</h2>
                 <p>Seu cadastro salva vidas.</p>
                 <hr>
-                <form action="" method="POST">
+                <form action="{% url 'cadastro' %}" method="POST">
+                    {% csrf_token %}
                     <span>Nome:</span>
                     <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome">
                     <br>
