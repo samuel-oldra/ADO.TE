@@ -1,1 +1,1 @@
-# Workshop Semana React e Python da Treinaweb (Front-end)
+## Workshop Semana React e Python da Treinaweb (Front-end)
