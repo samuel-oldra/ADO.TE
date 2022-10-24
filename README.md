@@ -1,1 +1,1 @@
-# Projeto Next.js & React
+# Workshop Semana React e Python da Treinaweb (Front)
