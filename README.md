@@ -46,6 +46,7 @@ env\Scripts\deactivate.bat
 ### Criar apps
 ```
 (env) python manage.py startapp usuarios
+(env) python manage.py startapp divulgar
 ```
 
 ### Migrations
