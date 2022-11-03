@@ -24,7 +24,7 @@
                         <hr>
                     </div>
                     <div class="body-box">
-                        <form action="" method="POST" enctype='multipart/form-data'>
+                        <form action="{% url 'novo_pet' %}" method="POST" enctype='multipart/form-data'>
                             {% csrf_token %}
 
                             {% if messages %}
