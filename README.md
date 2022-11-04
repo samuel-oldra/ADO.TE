@@ -14,13 +14,14 @@ Desenvolvida uma aplicação completa para adoção de animais.
 
 ## Funcionalidades
 - Autenticação e Cadastro de Usuários
-- Cadastro de Pets
+- Listagem e Cadastro de Pets
 
 ###
 
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/logar.png)
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/cadastre-se.png)
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/novo_pet.png)
+![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/seus_pets.png)
 
 ## Comandos
 
