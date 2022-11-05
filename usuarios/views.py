@@ -17,8 +17,10 @@ def cadastro(request):
         senha = request.POST.get('senha')
         confirmar_senha = request.POST.get('confirmar_senha')
 
-        if len(nome.strip()) == 0 or len(email.strip()) == 0 or len(senha.strip()) == 0 or len(
-                confirmar_senha.strip()) == 0:
+        if (len(nome.strip()) == 0
+            or len(email.strip()) == 0
+            or len(senha.strip()) == 0
+            or len(confirmar_senha.strip()) == 0):
             messages.add_message(request, constants.ERROR, 'Preencha todos os campos')
             return render(request, 'cadastro.html')
 
@@ -49,8 +51,8 @@ def logar(request):
     elif request.method == "POST":
         nome = request.POST.get('nome')
         senha = request.POST.get('senha')
-        user = authenticate(username=nome, password=senha)
 
+        user = authenticate(username=nome, password=senha)
         if user is not None:
             login(request, user)
             return redirect('/divulgar/novo_pet')
