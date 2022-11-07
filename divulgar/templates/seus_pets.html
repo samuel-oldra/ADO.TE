@@ -61,7 +61,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-danger">REMOVER</a>
+                                    <a href="{% url 'remover_pet' pet.id %}" class="btn btn-danger">REMOVER</a>
                                 </td>
                             </tr>
                         {% endfor %}
