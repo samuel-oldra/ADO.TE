@@ -1,0 +1,102 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/novo_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/seus_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'adotar/css/listar_pets.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-side sidebar">
+            <h2>ADO.TE</h2>
+            <hr>
+        </div>
+        <div class="col-md">
+            <div class="wrapper">
+                <div class="box width80">
+
+                    {% if messages %}
+                        <br>
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <h3 class="font-vinho">Adote</h3>
+                    <hr>
+                    <form action="{% url 'listar_pets' %}" method="GET">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Cidade..."
+                                       value="{% if cidade %}{{ cidade }}{% endif %}" name="cidade"
+                                       class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-select" name="raca">
+                                    <option value="">-- SELECIONE --</option>
+
+                                    {% for raca in racas %}
+                                        <option value="{{ raca.id }}" {% if raca_filter.id == raca.id %}
+                                                selected {% endif %}>{{ raca }}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" class="btn-custom-secondary" value="FILTRAR">
+                            </div>
+                        </div>
+                    </form>
+                    <table class="tabela" cellpadding="20">
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nome</th>
+                            <th>Raça</th>
+                            <th>Status</th>
+                            <th>Cidade</th>
+                        </tr>
+
+                        {% for pet in pets %}
+                            <tr class="tabela-linha">
+                                <td width="20%">
+                                    <a href=""><img width="40%" src="{{ pet.foto.url }}"></a>
+                                </td>
+                                <td>
+                                    {{ pet.nome }}
+                                </td>
+                                <td>
+                                    {{ pet.raca }}
+                                </td>
+                                <td>
+                                    {% if pet.status == "P" %}
+                                        <span class="badge text-bg-primary">Para adoção</span>
+                                    {% elif pet.status == "A" %}
+                                        <span class="badge text-bg-success">Adotado</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ pet.cidade }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
