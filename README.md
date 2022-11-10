@@ -15,7 +15,7 @@ Desenvolvida uma aplicação completa para adoção de animais.
 ## Funcionalidades
 - Autenticação e Cadastro de Usuários
 - Listagem, Cadastro e Remoção de Pets
-- Listagem e Busca de Pets para adoção
+- Listagem, Busca e Detalhes de Pets para adoção
 
 ###
 
@@ -24,6 +24,7 @@ Desenvolvida uma aplicação completa para adoção de animais.
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/novo_pet.png)
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/seus_pets.png)
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/adote.png)
+![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/ver_pet.png)
 
 ## Comandos
 

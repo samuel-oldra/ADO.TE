@@ -1,0 +1,77 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/novo_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/seus_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'adotar/css/listar_pets.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-side-plataforma sidebar">
+            <h2>ADO.TE</h2>
+            <hr>
+        </div>
+        <div style="padding:60px" class="col-md">
+            <h3 class="font-vinho">Informações do pet</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <img width="100%" src="{{ pet.foto.url }}">
+                </div>
+                <div class="col-md-9">
+                    <span class="span-bold">Nome:</span>
+                    <p>{{ pet.nome }}</p>
+                    <div style="width:40%">
+
+                        {% for tag in pet.tags.all %}
+                            <span class="badge text-bg-info badge-lg">{{ tag }}</span>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-5">
+                    <span class="span-bold">Descrição</span>
+                    <p>{{ pet.descricao }}</p>
+                </div>
+                <div class="col-md-7">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <h3 class="font-vinho">Informações residenciais</h3>
+                <div class="col-md">
+                    <div class="row">
+                        <div class="col-md">
+                            <span class="span-bold">Estado</span>
+                            <p>{{ pet.estado }}</p>
+                        </div>
+                        <div class="col-md">
+                            <span class="span-bold">Cidade</span>
+                            <p>{{ pet.cidade }}</p>
+                        </div>
+                    </div>
+                    <span class="span-bold">Telefone para contato</span>
+                    <p>{{ pet.telefone }}</p>
+                    <br>
+                    <a href="#" class="btn btn-success btn-lg">SOLICITAR ADOÇÃO</a>
+                </div>
+                <div class="col-md">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
