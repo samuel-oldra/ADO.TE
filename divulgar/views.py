@@ -55,7 +55,6 @@ def seus_pets(request):
 @login_required
 def remover_pet(request, id):
     pet = Pet.objects.get(id=id)
-
     if not pet.usuario == request.user:
         messages.add_message(request, constants.ERROR, 'Esse pet não é seu!')
         return redirect('/divulgar/seus_pets')

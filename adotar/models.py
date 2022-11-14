@@ -15,3 +15,6 @@ class PedidoAdocao(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     data = models.DateTimeField()
     status = models.CharField(max_length=2, choices=choices_status, default='AG')
+
+    def __str__(self):
+        return f'Pet: {self.pet.nome} - Usuário: {self.usuario.username}'
