@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.utils.datetime_safe import datetime
 
@@ -48,3 +49,30 @@ def pedido_adocao(request, id_pet):
         'Pedido de adoção realizado, você receberá um e-mail caso ele seja aprovado.'
     )
     return redirect('/adotar')
+
+
+def processa_pedido_adocao(request, id_pedido):
+    pedido = PedidoAdocao.objects.get(id=id_pedido)
+    status = request.GET.get('status')
+
+    if status == "A":
+        pedido.status = 'AP'
+        string = '''Olá, sua adoção foi aprovada. ...'''
+    elif status == "R":
+        string = '''Olá, sua adoção foi recusada. ...'''
+        pedido.status = 'R'
+
+    pedido.save()
+
+    # TODO: Alterar o status do Pet para Adotado se pedido Aprovado
+
+    print(pedido.usuario.email)
+    email = send_mail(
+        'Sua adoção foi processada',
+        string,
+        'caio@pythonando.com.br',
+        [pedido.usuario.email, ],
+    )
+
+    messages.add_message(request, constants.SUCCESS, 'Pedido de adoção processado com sucesso')
+    return redirect('/divulgar/ver_pedido_adocao')
