@@ -1,0 +1,65 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/novo_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/seus_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'adotar/css/listar_pets.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-side sidebar">
+            <h2>ADO.TE</h2>
+            <hr>
+        </div>
+        <div style="padding:60px" class="col-md">
+            <h3 class="font-vinho">Quantidade de pedidos de adoção por raça</h3>
+            <div style="width: 60%;">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch("/divulgar/api_adocoes_por_raca/", {
+        method: 'GET',
+    }).then(function (result) {
+        return result.json()
+    }).then(function (data_adocoes) {
+
+        const data = {
+            labels: data_adocoes['labels'],
+            datasets: [{
+                label: 'Pedidos de adoção',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: data_adocoes['qtd_adocoes'],
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
