@@ -32,6 +32,13 @@ Desenvolvida uma aplicação completa para adoção de animais.
 
 ## Comandos
 
+### pip
+```
+pip list --outdate
+python -m pip install --upgrade pip
+python -m pip install --upgrade setuptools
+```
+
 ### virtualenv (windows)
 ```
 python -m venv env
@@ -62,6 +69,7 @@ env\Scripts\deactivate.bat
 ```
 (env) python manage.py startapp usuarios
 (env) python manage.py startapp divulgar
+(env) python manage.py startapp adotar
 ```
 
 ### Migrations
