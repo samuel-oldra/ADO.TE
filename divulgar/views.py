@@ -22,15 +22,16 @@ def novo_pet(request):
         estado = request.POST.get('estado')
         cidade = request.POST.get('cidade')
         telefone = request.POST.get('telefone')
-        tags = request.POST.getlist('tags')
         raca = request.POST.get('raca')
+        tags = request.POST.getlist('tags')
 
         # TODO: Validar dados
 
         # Primeiro salva os dados do Pet
         pet = Pet(
             usuario=request.user,
-            foto=foto, nome=nome,
+            foto=foto,
+            nome=nome,
             descricao=descricao,
             estado=estado,
             cidade=cidade,
@@ -58,6 +59,7 @@ def seus_pets(request):
 @login_required
 def remover_pet(request, id):
     pet = Pet.objects.get(id=id)
+
     if not pet.usuario == request.user:
         messages.add_message(request, constants.ERROR, 'Esse pet não é seu!')
         return redirect('/divulgar/seus_pets')
@@ -93,7 +95,6 @@ def api_adocoes_por_raca(request):
     for raca in racas:
         adocoes = PedidoAdocao.objects.filter(pet__raca=raca).count()
         qtd_adocoes.append(adocoes)
-
     racas = [raca.raca for raca in racas]
 
     data = {

@@ -9,8 +9,8 @@ def cadastro(request):
     if request.method == "GET":
         if request.user.is_authenticated:
             return redirect('/divulgar/novo_pet')
-
-        return render(request, 'cadastro.html')
+        else:
+            return render(request, 'cadastro.html')
     elif request.method == "POST":
         nome = request.POST.get('nome')
         email = request.POST.get('email')
@@ -46,8 +46,8 @@ def logar(request):
     if request.method == "GET":
         if request.user.is_authenticated:
             return redirect('/divulgar/novo_pet')
-
-        return render(request, 'login.html')
+        else:
+            return render(request, 'login.html')
     elif request.method == "POST":
         nome = request.POST.get('nome')
         senha = request.POST.get('senha')

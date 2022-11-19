@@ -32,6 +32,7 @@ def listar_pets(request):
 
 def pedido_adocao(request, id_pet):
     pet = Pet.objects.filter(id=id_pet).filter(status="P")
+
     if not pet.exists():
         messages.add_message(request, constants.WARNING, 'Esse pet já foi adotado :)')
         return redirect('/adotar')
@@ -52,8 +53,9 @@ def pedido_adocao(request, id_pet):
 
 
 def processa_pedido_adocao(request, id_pedido):
-    pedido = PedidoAdocao.objects.get(id=id_pedido)
     status = request.GET.get('status')
+
+    pedido = PedidoAdocao.objects.get(id=id_pedido)
 
     if status == "A":
         pedido.status = 'AP'
@@ -61,16 +63,16 @@ def processa_pedido_adocao(request, id_pedido):
     elif status == "R":
         string = '''Olá, sua adoção foi recusada. ...'''
         pedido.status = 'R'
-
     pedido.save()
 
     # TODO: Alterar o status do Pet para Adotado se pedido Aprovado
 
     print(pedido.usuario.email)
+
     email = send_mail(
         'Sua adoção foi processada',
         string,
-        'caio@pythonando.com.br',
+        'samuel.oldra@gmail.com.br',
         [pedido.usuario.email, ],
     )
 
