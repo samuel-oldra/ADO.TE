@@ -1,13 +1,13 @@
 # Aplicação usando Python e Django 4.1
 
-## ADO.TE - PyStack Week: O Retorno
+## ADO.TE - PyStack Week 5.0
 
 Aplicação que conecta pessoas que possuem animais para doação com interessadas em ter um animal de estimação.
 
 Desenvolvida uma aplicação completa para adoção de animais.
 
 ## Tecnologias e práticas utilizadas
-- Python
+- Python 3.8
 - Django 4.1
 - SQLite
 - Arquitetura MVT
@@ -35,8 +35,7 @@ Desenvolvida uma aplicação completa para adoção de animais.
 ### pip
 ```
 pip list --outdate
-python -m pip install --upgrade pip
-python -m pip install --upgrade setuptools
+pip install --upgrade pip setuptools Django ...
 ```
 
 ### virtualenv (windows)
@@ -62,7 +61,7 @@ env\Scripts\deactivate.bat
 
 ### Criar super user (Django Administration)
 ```
-(env) python manage.py createsuperuser
+(env) python manage.py createsuperuser (admin/admin)
 ```
 
 ### Criar apps
