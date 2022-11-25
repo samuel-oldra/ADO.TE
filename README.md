@@ -1,6 +1,11 @@
-# Aplicação usando Python e Django 4.2
-
-## ADO.TE - PyStack Week 5.0
+<h1 align="center">
+  ADO.TE - PyStack Week 5.0
+</h1>
+<p align="center">
+  <a href="#tecnologias-e-práticas-utilizadas">Tecnologias e práticas utilizadas</a> •
+  <a href="#funcionalidades">Funcionalidades</a> •
+  <a href="#comandos">Comandos</a>
+</p>
 
 Aplicação que conecta pessoas que possuem animais para doação com interessadas em ter um animal de estimação.
 
