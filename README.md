@@ -5,3 +5,10 @@
 Aplicação que conecta pessoas que possuem animais para doação com interessadas em ter um animal de estimação.
 
 Desenvolvida uma aplicação completa para adoção de animais.
+
+### virtualenv (windows)
+```
+python -m venv env
+env\Scripts\activate.bat
+env\Scripts\deactivate.bat
+```
