@@ -19,6 +19,7 @@ Desenvolvida uma aplicação completa para adoção de animais.
 
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/logar.png)
 ![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/cadastre-se.png)
+![alt text](https://raw.githubusercontent.com/samuel-oldra/ADO.TE/main/README_IMGS/novo_pet.png)
 
 ## Comandos
 
