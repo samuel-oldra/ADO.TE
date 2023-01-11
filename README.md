@@ -14,6 +14,7 @@ Desenvolvida uma aplicação completa para adoção de animais.
 
 ## Funcionalidades
 - Autenticação e Cadastro de Usuários
+- Cadastro de Pets
 
 ###
 
