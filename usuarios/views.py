@@ -2,13 +2,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.messages import constants
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 
 
 def cadastro(request):
     if request.method == "GET":
         if request.user.is_authenticated:
-            return redirect('/divulgar/novo_pet')
+            return redirect('/divulgar/dashboard')
 
         return render(request, 'cadastro.html')
     elif request.method == "POST":
@@ -33,8 +33,8 @@ def cadastro(request):
                 password=senha,
             )
 
-            messages.add_message(request, constants.ERROR, 'Usuário criado com sucesso')
-            return render(request, 'cadastro.html')
+            messages.add_message(request, constants.SUCCESS, 'Usuário criado com sucesso')
+            return redirect('/auth/login')
         except:
             messages.add_message(request, constants.ERROR, 'Erro interno do sistema')
             return render(request, 'cadastro.html')
@@ -43,7 +43,7 @@ def cadastro(request):
 def logar(request):
     if request.method == "GET":
         if request.user.is_authenticated:
-            return redirect('/divulgar/novo_pet')
+            return redirect('/divulgar/dashboard')
 
         return render(request, 'login.html')
     elif request.method == "POST":
@@ -53,7 +53,7 @@ def logar(request):
 
         if user is not None:
             login(request, user)
-            return redirect('/divulgar/novo_pet')
+            return redirect('/divulgar/dashboard')
         else:
             messages.add_message(request, constants.ERROR, 'Usuário ou senha inválidos')
             return render(request, 'login.html')
