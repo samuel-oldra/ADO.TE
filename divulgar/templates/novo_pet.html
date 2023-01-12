@@ -1,94 +1,237 @@
+{% extends "base.html" %}
 {% load static %}
-<!doctype html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
-    <link href="{% static 'divulgar/css/novo_pet.css' %}" rel="stylesheet">
-</head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2 bg-side sidebar">
-            <h2>ADO.TE</h2>
-            <hr>
-        </div>
-        <div class="col-md">
-            <div class="wrapper">
-                <div class="box">
-                    <div class="header-box">
-                        <h3 class="font-vinho">Quero divulgar</h3>
-                        <hr>
+{% block title %}Novo Pet{% endblock %}
+{% block content %}
+<div class="min-h-full">
+    <nav class="bg-gray-800" x-data="{ isMobileOpen: false }">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <img class="h-12 w-12" src="{% static 'usuarios/img/logo_adote.png' %}" alt="Your Company">
                     </div>
-                    <div class="body-box">
-                        <form action="" method="POST" enctype='multipart/form-data'>
-                            {% csrf_token %}
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                            <a href="{% url 'dashboard' %}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                aria-current="page">Dashboard</a>
 
-                            {% if messages %}
-                                <br>
-                                {% for message in messages %}
-                                    <div class="alert {{ message.tags }}">
-                                        {{ message }}
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
+                            <a href="{% url 'novo_pet' %}"
+                                class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Pets</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <!-- <button type="button"
+                            class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            <span class="sr-only">View notifications</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                        </svg>
+                        </button> -->
+                        <div class="text-white flex flex-col items-end">
+                            <div class="text-base font-medium leading-none text-white">{{user.username}}</div>
+                            <div class="text-sm font-medium leading-none text-gray-400">{{user.email}}</div>
+                        </div>
 
-                            <input type="file" name="foto" class="form-control">
-                            <br>
-                            <span>Nome:</span>
-                            <input type="text" class="form-control" name="nome"
-                                   placeholder="Digite o nome do pet...">
-                            <br>
-                            <span>Descrição:</span>
-                            <textarea class="form-control" name="descricao"
-                                      placeholder="Descrição..."></textarea>
-                            <br>
-                            <div class="row">
-                                <div class="col-md">
-                                    <span>Estado:</span>
-                                    <input type="text" placeholder="Digite o estado do pet..." name="estado"
-                                           class="form-control">
-                                </div>
-                                <div class="col-md">
-                                    <span>Cidade:</span>
-                                    <input type="text" placeholder="Digite a cidade do pet..." name="cidade"
-                                           class="form-control">
-                                </div>
+                        <!-- Profile dropdown -->
+                        <div class="relative ml-3" x-data="{ open: false }">
+                            <div>
+                                <button type="button"
+                                    class="flex max-w-xs items-center text-gray-300 rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 hover:text-white"
+                                    id="user-menu-button" aria-expanded="false" aria-haspopup="true"
+                                    x-on:click="open = !open">
+                                    <span class="sr-only">Open user menu</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-10 h-10 rounded-full">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </button>
                             </div>
-                            <br>
-                            <span>Telefone para contato:</span>
-                            <input type="text" placeholder="Digite o seu telefone..." name="telefone"
-                                   class="form-control">
-                            <br>
-                            <span>Tags:</span>
-                            <select name="tags" multiple class="form-select">
+                            <div x-bind:class="open ? 'absolute' : 'hidden'"
+                                class=" right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
+                                tabindex="-1">
+                                <!-- Active: "bg-gray-100", Not Active: "" -->
 
-                                {% for tag in tags %}
-                                    <option value="{{ tag.id }}">{{ tag }}</option>
-                                {% endfor %}
-
-                            </select>
-                            <br>
-                            </span>Raça:</span>
-                            <select name="raca" class="form-select">
-
-                                {% for raca in racas %}
-                                    <option value="{{ raca.id }}">{{ raca }}</option>
-                                {% endfor %}
-
-                            </select>
-                            <input type="submit" value="ENVIAR" class="btn-custom-primary">
-                        </form>
+                                <a href="{% url 'sair' %}"
+                                    class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 active:bg-gray-100"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Sair</a>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <!-- Mobile menu button -->
+                    <button type="button"
+                        class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        aria-controls="mobile-menu" aria-expanded="false" x-on:click="isMobileOpen = !isMobileOpen">
+                        <span class="sr-only">Open main menu</span>
+                        <svg x-bind:class="isMobileOpen ? 'hidden' : 'block'" class="h-6 w-6"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg x-bind:class="isMobileOpen ? 'block' : 'hidden'" class="h-6 w-6"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden" id="mobile-menu" x-show.transition.in="isMobileOpen">
+            <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a href="{% url 'dashboard' %}"
+                    class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                    aria-current="page">Dashboard</a>
+
+                <a href="{% url 'novo_pet' %}"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pets</a>
+            </div>
+            <div class="border-t border-gray-700 pt-4 pb-3">
+                <div class="flex items-center px-5">
+                    <div class="flex-shrink-0 text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-10 h-10 rounded-full">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-base font-medium leading-none text-white">{{user.username}}</div>
+                        <div class="text-sm font-medium leading-none text-gray-400">{{user.email}}</div>
+                    </div>
+                    <!-- <button type="button"
+                        class="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span class="sr-only">View notifications</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    </svg>
+                    </button> -->
+                </div>
+                <div class="mt-3 space-y-1 px-2">
+                    <a href="{% url 'sair' %}"
+                        class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sair</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-white shadow">
+        <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Cadastro de Pets</h1>
+        </div>
+    </header>
+    <main>
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <!-- Replace with your content -->
+            <div class="px-4 py-6 sm:px-0">
+                <div class="h-96 rounded-lg">
+                    <form action="" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+
+                        {% if messages %}
+                        <br>
+                        {% for message in messages %}
+                        <div class="alert {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                        <div class="flex justify-center">
+                            <div class="mb-3 w-96">
+                                <label for="form-foto" class="form-label inline-block mb-2 text-gray-700">Foto do
+                                    Pet:</label>
+                                <input class="form-control
+                              block
+                              w-full
+                              py-1.5
+                              text-base
+                              font-normal
+                              text-gray-700
+                              bg-white bg-clip-padding
+                              rounded
+                              transition
+                              ease-in-out
+                              m-0
+                              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file"
+                                    id="form-foto" name="foto">
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <br>
+                        <span>Nome:</span>
+                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome do pet...">
+                        <br>
+                        <span>Descrição:</span>
+                        <textarea class="form-control" name="descricao" placeholder="Descrição..."></textarea>
+                        <br>
+                        <div class="row">
+                            <div class="col-md">
+                                <span>Estado:</span>
+                                <input type="text" placeholder="Digite o estado do pet..." name="estado"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md">
+                                <span>Cidade:</span>
+                                <input type="text" placeholder="Digite a cidade do pet..." name="cidade"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <br>
+                        <span>Telefone para contato:</span>
+                        <input type="text" placeholder="Digite o seu telefone..." name="telefone" class="form-control">
+                        <br>
+                        <span>Tags:</span>
+                        <select name="tags" multiple class="form-select">
+
+                            {% for tag in tags %}
+                            <option value="{{ tag.id }}">{{ tag }}</option>
+                            {% endfor %}
+
+                        </select>
+                        <br>
+                        </span>Raça:</span>
+                        <select name="raca" class="form-select">
+
+                            {% for raca in racas %}
+                            <option value="{{ raca.id }}">{{ raca }}</option>
+                            {% endfor %}
+
+                        </select>
+                        <input type="submit" value="ENVIAR" class="btn-custom-primary">
+                    </form>
+                </div>
+            </div>
+            <!-- /End replace -->
+        </div>
+    </main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
