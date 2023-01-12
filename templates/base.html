@@ -1,0 +1,18 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{% static 'usuarios/img/logo_adote.png' %}">
+  <title>ADO.TE | {% block title %}{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,aspect-ratio,line-clamp" rel="preload"></script>
+  <script src="//unpkg.com/alpinejs" defer rel="preload"></script>
+</head>
+
+<body class="h-full">
+  {% block content %}{% endblock %}
+</body>
+
+</html>
