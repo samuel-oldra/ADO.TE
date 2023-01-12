@@ -1,57 +1,74 @@
+{% extends "base.html" %}
 {% load static %}
-
-<!doctype html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
-</head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-5 bg-side">
-            <div class='header'>
-                <img src="{% static 'usuarios/img/logo_adote.png' %}" width="9%"><span class="font-logo">ADO.TE</span>
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md space-y-8">
+        <div>
+            <img class="mx-auto h-44 w-auto aspect-square" src="{% static 'usuarios/img/logo_adote.png' %}"
+                alt="ADO.TE">
+            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-blue-600">ADO.TE</h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                <span class="font-medium text-blue-600">Que bom ter você de volta.</span>
+            </p>
+        </div>
+        <form class="mt-8 space-y-6" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="remember" value="true">
+            <div class="-space-y-px rounded-md shadow-sm">
+                <div>
+                    <label for="username" class="sr-only">Usuário</label>
+                    <input id="username" name="nome" type="text" required
+                        class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                        placeholder="Digite seu nome...">
+                </div>
+                <div>
+                    <label for="password" class="sr-only">Senha</label>
+                    <input id="password" name="senha" type="password" autocomplete="current-password" required
+                        class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                        placeholder="Digite sua senha...">
+                </div>
             </div>
-            <div class="body-form">
 
-                {% if messages %}
-                    <br>
-                    {% for message in messages %}
-                        <div class="alert {{ message.tags }}">
-                            {{ message }}
+            <div class="flex items-center justify-end">
+                <div class="text-sm">
+                    Não possui uma conta? <a href="{% url 'cadastro' %}"
+                        class="font-medium text-blue-600 hover:text-blue-500">Cadastre-se.</a>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit"
+                    class="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <!-- Heroicon name: mini/lock-closed -->
+                        <svg class="h-5 w-5 text-blue-500 group-hover:text-blue-400" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    Entrar
+                </button>
+            </div>
+            {% if messages %}
+            <div class="shadow" role="alert">
+                <div class="flex">
+                    <div class="bg-white border-l-4 border-red-400 w-full p-4">
+                        <div>
+                            <p class="text-gray-600 font-bold text-sm">Alguns erros encontrados:</p>
+                            <ul class="text-gray-600 text-xs">
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
                         </div>
-                    {% endfor %}
-                {% endif %}
-
-                <h2>Logar</h2>
-                <p>Que bom ter você de volta.</p>
-                <hr>
-                <form action="{% url 'login' %}" method="POST">
-                    {% csrf_token %}
-                    <span>Nome:</span>
-                    <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome">
-                    <br>
-                    <span>Senha:</span>
-                    <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha">
-                    <input type="submit" value="LOGAR" class="btn-custom-primary">
-                    <a href="{% url 'cadastro' %}" class="link-float">Cadastre-se</a>
-                </form>
+                    </div>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="col-md-7">
-            <div class="side-logo">
-                <img class="logo-margin-top" src="{% static 'usuarios/img/logo_adote.png' %}" width="20%">
-                <h1>ADO.TE</h1>
-                <p>Nos ajude a salvar vidas.</p>
-            </div>
-        </div>
+            {% endif %}
+        </form>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
