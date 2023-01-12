@@ -129,103 +129,83 @@
             </div>
         </div>
     </nav>
-
     <header class="bg-white shadow">
         <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Cadastro de Pets</h1>
         </div>
     </header>
+    <!-- BANNER -->
+    {% if messages %}
+    <div class="bg-red-400">
+        <div class="mx-auto max-w-7xl py-3 px-3 sm:px-6 lg:px-8">
+          <div class="flex flex-wrap items-center justify-between">
+            <div class="flex w-0 flex-1 items-center">
+              <span class="flex rounded-lg bg-red-800 p-2 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>                  
+              </span>
+              <p class="ml-3 truncate font-medium text-white">
+                {% for message in messages %}
+                <span>{{ message }}</span>
+                {% endfor %}
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- FIM BANNER -->
     <main>
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <!-- Replace with your content -->
             <div class="px-4 py-6 sm:px-0">
-                <div class="h-96 rounded-lg">
-                    <form action="" method="POST" enctype='multipart/form-data'>
+                <div class="rounded-lg">
+                    <form action="" method="POST" enctype='multipart/form-data' class="mb-10">
                         {% csrf_token %}
-
-                        {% if messages %}
-                        <br>
-                        {% for message in messages %}
-                        <div class="alert {{ message.tags }}">
-                            {{ message }}
-                        </div>
-                        {% endfor %}
-                        {% endif %}
-
-                        <div class="flex justify-center">
+                        <div class="flex flex-col justify-center">
                             <div class="mb-3 w-96">
-                                <label for="form-foto" class="form-label inline-block mb-2 text-gray-700">Foto do
-                                    Pet:</label>
-                                <input class="form-control
-                              block
-                              w-full
-                              py-1.5
-                              text-base
-                              font-normal
-                              text-gray-700
-                              bg-white bg-clip-padding
-                              rounded
-                              transition
-                              ease-in-out
-                              m-0
-                              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file"
-                                    id="form-foto" name="foto">
+                                <label for="form-foto" class="form-label inline-block mb-2 text-gray-700">Foto do Pet:</label>
+                                <input type="file" id="form-foto" name="foto" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
                             </div>
+                            <div class="mb-3 w-96">
+                                <label for="nome" class="form-label inline-block mb-2 text-gray-700">Nome:</label>
+                                <input type="text" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="nome" placeholder="Digite o nome do pet...">
+                            </div>
+                            <div class="mb-3 w-96">
+                                <label for="descricao" class="form-label inline-block mb-2 text-gray-700">Descrição:</label>
+                                <textarea id="descricao" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="descricao" placeholder="Descrição..."></textarea>
+                            </div>
+                            <div class="mb-3 w-96">
+                                <label for="estado" class="form-label inline-block mb-2 text-gray-700">Estado:</label>
+                                <input id="estado" type="text" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="estado" placeholder="Digite o estado do pet...">
+                            </div>
+                            <div class="mb-3 w-96">
+                                <label for="cidade" class="form-label inline-block mb-2 text-gray-700">Cidade:</label>
+                                <input id="cidade" type="text" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="cidade" placeholder="Digite a cidade do pet...">
+                            </div>
+                            <div class="mb-3 w-96">
+                                <label for="telefone" class="form-label inline-block mb-2 text-gray-700">Telefone para contato:</label>
+                                <input id="telefone" type="text" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="telefone" placeholder="Digite telefone de contato...">
+                            </div>
+                            <div class="mb-3 w-96">
+                                <label for="tags" class="form-label inline-block mb-2 text-gray-700">Tags:</label>
+                                <select id="tags" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="tags">
+                                    {% for tag in tags %}
+                                        <option value="{{ tag.id }}">{{ tag }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3 w-96">
+                                <label for="raca" class="form-label inline-block mb-2 text-gray-700">Raça:</label>
+                                <select id="raca" class="form-control block w-full py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="raca">
+                                    {% for raca in racas %}
+                                        <option value="{{ raca.id }}">{{ raca }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input type="submit" value="cadastrar" class="mt-4 w-96 bg-blue-800 hover:bg-blue-700 py-1.5 text-base font-semibold text-white rounded uppercase cursor-pointer">
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <br>
-                        <span>Nome:</span>
-                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome do pet...">
-                        <br>
-                        <span>Descrição:</span>
-                        <textarea class="form-control" name="descricao" placeholder="Descrição..."></textarea>
-                        <br>
-                        <div class="row">
-                            <div class="col-md">
-                                <span>Estado:</span>
-                                <input type="text" placeholder="Digite o estado do pet..." name="estado"
-                                    class="form-control">
-                            </div>
-                            <div class="col-md">
-                                <span>Cidade:</span>
-                                <input type="text" placeholder="Digite a cidade do pet..." name="cidade"
-                                    class="form-control">
-                            </div>
-                        </div>
-                        <br>
-                        <span>Telefone para contato:</span>
-                        <input type="text" placeholder="Digite o seu telefone..." name="telefone" class="form-control">
-                        <br>
-                        <span>Tags:</span>
-                        <select name="tags" multiple class="form-select">
-
-                            {% for tag in tags %}
-                            <option value="{{ tag.id }}">{{ tag }}</option>
-                            {% endfor %}
-
-                        </select>
-                        <br>
-                        </span>Raça:</span>
-                        <select name="raca" class="form-select">
-
-                            {% for raca in racas %}
-                            <option value="{{ raca.id }}">{{ raca }}</option>
-                            {% endfor %}
-
-                        </select>
-                        <input type="submit" value="ENVIAR" class="btn-custom-primary">
                     </form>
                 </div>
             </div>
